@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://geek-gifts.fgar:15003';
+const API_URL = 'http://localhost:15003';
 
 export const api = axios.create({
     baseURL: API_URL,

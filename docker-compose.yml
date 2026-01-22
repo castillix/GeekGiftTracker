@@ -6,7 +6,7 @@ services:
       - geekgift_data:/app/db
       - geekgift_uploads:/app/uploads
     ports:
-      - "8000:8000"
+      - "15003:8000"
 
   frontend:
     build: ./frontend
