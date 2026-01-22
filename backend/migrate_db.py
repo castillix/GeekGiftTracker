@@ -15,7 +15,8 @@ def migrate():
 
     columns_to_add = [
         ("requestor_contact", "VARCHAR"),
-        ("client_contact", "VARCHAR")
+        ("client_contact", "VARCHAR"),
+        ("due_date", "DATETIME")
     ]
 
     for col_name, col_type in columns_to_add:
