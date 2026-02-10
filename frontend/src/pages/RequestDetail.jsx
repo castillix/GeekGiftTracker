@@ -18,6 +18,8 @@ const RequestDetail = () => {
     const [formData, setFormData] = useState({
         technician: '',
         status: '',
+        organization_name: '',
+        request_date: '',
         receipt_id: '',
         pickup_date: '',
         computer_model: '',
@@ -37,6 +39,8 @@ const RequestDetail = () => {
             setFormData({
                 technician: data.technician || '',
                 status: data.status,
+                organization_name: data.organization_name || '',
+                request_date: data.request_date ? data.request_date.split('T')[0] : '',
                 receipt_id: data.receipt_id || '',
                 pickup_date: data.pickup_date ? data.pickup_date.split('T')[0] : '',
                 computer_model: data.computer_model || '',
@@ -114,10 +118,10 @@ const RequestDetail = () => {
                             <div>
                                 <h1 className="text-2xl font-bold text-slate-900">{request.recipient_name}</h1>
 
-                                {request.organization_name && (
+                                {formData.organization_name && (
                                     <div className="flex items-center gap-2 text-slate-600 mt-1">
                                         <Building className="w-4 h-4 text-slate-400" />
-                                        <span className="font-medium">{request.organization_name}</span>
+                                        <span className="font-medium">{formData.organization_name}</span>
                                     </div>
                                 )}
 
@@ -133,10 +137,10 @@ const RequestDetail = () => {
                                 </div>
 
                                 <div className="flex flex-wrap gap-4 mt-3">
-                                    {request.request_date && (
+                                    {formData.request_date && (
                                         <div className="flex items-center gap-1 text-slate-500 text-sm">
                                             <Calendar className="w-4 h-4" />
-                                            <span>Requested: {new Date(request.request_date).toLocaleDateString()}</span>
+                                            <span>Requested: {new Date(formData.request_date).toLocaleDateString(undefined, { timeZone: 'UTC' })}</span>
                                         </div>
                                     )}
                                     {request.due_date && (
@@ -240,6 +244,35 @@ const RequestDetail = () => {
                                     <option value="ready_for_pickup">Ready for Pickup</option>
                                     <option value="completed">Completed</option>
                                 </select>
+                            </div>
+
+                            <div>
+                                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Organization Name</label>
+                                <div className="relative">
+                                    <Building className="w-4 h-4 absolute left-3 top-2.5 text-slate-400" />
+                                    <input
+                                        type="text"
+                                        name="organization_name"
+                                        value={formData.organization_name}
+                                        onChange={handleInputChange}
+                                        className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                        placeholder="Organization..."
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Request Date</label>
+                                <div className="relative">
+                                    <Calendar className="w-4 h-4 absolute left-3 top-2.5 text-slate-400" />
+                                    <input
+                                        type="date"
+                                        name="request_date"
+                                        value={formData.request_date}
+                                        onChange={handleInputChange}
+                                        className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                    />
+                                </div>
                             </div>
 
                             <div>

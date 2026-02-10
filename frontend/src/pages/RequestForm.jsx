@@ -78,18 +78,6 @@ const RequestForm = () => {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-1">Request Date</label>
-                        <input
-                            type="date"
-                            name="request_date"
-                            required
-                            value={formData.request_date}
-                            onChange={handleChange}
-                            className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
-                        />
-                    </div>
-
-                    <div>
                         <label className="block text-sm font-medium text-slate-700 mb-1">Recipient Name</label>
                         <input
                             type="text"
