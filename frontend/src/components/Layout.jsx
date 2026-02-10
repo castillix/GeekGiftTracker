@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import { Gift, LayoutDashboard, PlusCircle } from 'lucide-react';
+import { Gift, LayoutDashboard, PlusCircle, CheckCircle } from 'lucide-react';
 
 const Layout = () => {
     return (
@@ -18,6 +18,10 @@ const Layout = () => {
                     <Link to="/" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 transition-colors text-slate-300 hover:text-white group">
                         <LayoutDashboard className="w-5 h-5 group-hover:text-indigo-400 transition-colors" />
                         <span className="font-medium">Dashboard</span>
+                    </Link>
+                    <Link to="/completed" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 transition-colors text-slate-300 hover:text-white group">
+                        <CheckCircle className="w-5 h-5 group-hover:text-green-400 transition-colors" />
+                        <span className="font-medium">Completed</span>
                     </Link>
                     <Link to="/new" className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 transition-colors text-slate-300 hover:text-white group">
                         <PlusCircle className="w-5 h-5 group-hover:text-indigo-400 transition-colors" />

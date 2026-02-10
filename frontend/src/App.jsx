@@ -3,6 +3,7 @@ import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import RequestForm from './pages/RequestForm';
 import RequestDetail from './pages/RequestDetail';
+import CompletedRequests from './pages/CompletedRequests';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />} />
+          <Route path="completed" element={<CompletedRequests />} />
           <Route path="new" element={<RequestForm />} />
           <Route path="requests/:id" element={<RequestDetail />} />
           <Route path="*" element={<Navigate to="/" replace />} />

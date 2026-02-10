@@ -46,7 +46,6 @@ const Dashboard = () => {
         { title: "Not Started", status: "not_started", color: "bg-slate-100 border-slate-200" },
         { title: "In Progress", status: "in_progress", color: "bg-blue-50 border-blue-100" },
         { title: "Ready for Pickup", status: "ready_for_pickup", color: "bg-amber-50 border-amber-100" },
-        { title: "Completed", status: "completed", color: "bg-green-50 border-green-100" },
     ];
 
     if (loading) return <div className="p-8 text-center text-slate-500">Loading requests...</div>;
