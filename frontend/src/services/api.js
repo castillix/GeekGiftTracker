@@ -27,8 +27,8 @@ export const updateRequest = async (id, data) => {
     return response.data;
 };
 
-export const createComment = async (id, content) => {
-    const response = await api.post(`/requests/${id}/comments/`, { content });
+export const createComment = async (id, data) => {
+    const response = await api.post(`/requests/${id}/comments/`, data);
     return response.data;
 }
 
