@@ -50,6 +50,8 @@ async def create_request(
     client_contact: Optional[str] = Form(None),
     description: Optional[str] = Form(None),
     technician: Optional[str] = Form(None),
+    organization_name: Optional[str] = Form(None),
+    request_date: Optional[datetime.datetime] = Form(None),
     file: Optional[UploadFile] = File(None),
     db: Session = Depends(get_db)
 ):
@@ -69,6 +71,8 @@ async def create_request(
         client_contact=client_contact,
         description=description,
         technician=technician,
+        organization_name=organization_name,
+        request_date=request_date or datetime.datetime.utcnow(),
         filename=filename
     )
     db.add(db_request)
@@ -108,7 +112,11 @@ def create_comment(request_id: int, comment: schemas.CommentCreate, db: Session 
     if db_request is None:
         raise HTTPException(status_code=404, detail="Request not found")
     
-    db_comment = models.Comment(content=comment.content, request_id=request_id)
+    db_comment = models.Comment(
+        content=comment.content, 
+        request_id=request_id,
+        author=comment.author
+    )
     db.add(db_comment)
     db.commit()
     db.refresh(db_comment)

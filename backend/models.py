@@ -25,6 +25,15 @@ class GeekGiftRequest(Base):
     due_date = Column(DateTime, nullable=True)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
 
+    # New fields for Refactor
+    organization_name = Column(String, nullable=True)
+    request_date = Column(DateTime, default=datetime.datetime.utcnow)
+    receipt_id = Column(String, nullable=True)
+    pickup_date = Column(DateTime, nullable=True)
+    computer_model = Column(String, nullable=True)
+    computer_type = Column(String, nullable=True) # laptop/desktop
+    computer_price = Column(String, nullable=True)
+
     comments = relationship("Comment", back_populates="request", cascade="all, delete-orphan")
 
 class Comment(Base):
@@ -33,6 +42,7 @@ class Comment(Base):
     id = Column(Integer, primary_key=True, index=True)
     request_id = Column(Integer, ForeignKey("requests.id"))
     content = Column(String)
+    author = Column(String, nullable=True) # Technician Name
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
 
     request = relationship("GeekGiftRequest", back_populates="comments")

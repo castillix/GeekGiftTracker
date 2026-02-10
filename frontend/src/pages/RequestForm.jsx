@@ -9,11 +9,13 @@ const RequestForm = () => {
     const [file, setFile] = useState(null);
     const [formData, setFormData] = useState({
         recipient_name: '',
-        recipient_name: '',
+        contact_info: '', // Kept for compatibility if backend expects it
         requestor_contact: '',
         client_contact: '',
         description: '',
         technician: '',
+        organization_name: '',
+        request_date: new Date().toISOString().split('T')[0], // Default to today
     });
 
     const handleChange = (e) => {
@@ -32,6 +34,9 @@ const RequestForm = () => {
         data.append('recipient_name', formData.recipient_name);
         if (formData.requestor_contact) data.append('requestor_contact', formData.requestor_contact);
         if (formData.client_contact) data.append('client_contact', formData.client_contact);
+        if (formData.organization_name) data.append('organization_name', formData.organization_name);
+        if (formData.request_date) data.append('request_date', formData.request_date);
+
         data.append('description', formData.description);
         if (formData.due_date) data.append('due_date', formData.due_date);
         if (formData.technician) data.append('technician', formData.technician);
@@ -59,6 +64,31 @@ const RequestForm = () => {
 
             <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
                 <form onSubmit={handleSubmit} className="space-y-5">
+                    <div>
+                        <label className="block text-sm font-medium text-slate-700 mb-1">Organization Name</label>
+                        <input
+                            type="text"
+                            name="organization_name"
+                            required
+                            value={formData.organization_name}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+                            placeholder="e.g. Free Geek"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-medium text-slate-700 mb-1">Request Date</label>
+                        <input
+                            type="date"
+                            name="request_date"
+                            required
+                            value={formData.request_date}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+                        />
+                    </div>
+
                     <div>
                         <label className="block text-sm font-medium text-slate-700 mb-1">Recipient Name</label>
                         <input
