@@ -16,7 +16,14 @@ const CompletedRequests = () => {
         try {
             const data = await getRequests();
             // Filter for completed requests only
-            setRequests(data.filter(r => r.status === 'completed'));
+            const completed = data.filter(r => r.status === 'completed');
+            // Sort by Pickup Date (newest first)
+            completed.sort((a, b) => {
+                const dateA = a.pickup_date ? new Date(a.pickup_date) : new Date(0);
+                const dateB = b.pickup_date ? new Date(b.pickup_date) : new Date(0);
+                return dateB - dateA;
+            });
+            setRequests(completed);
         } catch (error) {
             console.error("Failed to load requests", error);
         } finally {
