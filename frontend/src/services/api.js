@@ -34,7 +34,7 @@ export const createComment = async (id, content) => {
 
 export const getFileUrl = (filename) => {
     if (!filename) return null;
-    return `${API_URL}/download/${filename}`;
+    return `${API_URL}/uploads/${filename}`;
 };
 
 export const deleteRequest = async (id) => {
