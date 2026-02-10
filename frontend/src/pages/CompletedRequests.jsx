@@ -34,8 +34,8 @@ const CompletedRequests = () => {
     const handleExport = () => {
         // Define headers
         const headers = [
-            'ID', 'Recipient', 'Organization', 'Status', 'Technician',
-            'Request Date', 'Completed Date', 'Receipt ID', 'Pickup Date',
+            'ID', 'Recipient', 'Organization',
+            'Request Date', 'Pickup Date', 'Receipt ID',
             'Model', 'Type', 'Price'
         ];
 
@@ -44,12 +44,9 @@ const CompletedRequests = () => {
             r.id,
             `"${r.recipient_name || ''}"`,
             `"${r.organization_name || ''}"`,
-            r.status,
-            `"${r.technician || ''}"`,
             r.request_date ? new Date(r.request_date).toLocaleDateString() : '',
-            r.created_at ? new Date(r.created_at).toLocaleDateString() : '',
-            `"${r.receipt_id || ''}"`,
             r.pickup_date ? new Date(r.pickup_date).toLocaleDateString() : '',
+            `"${r.receipt_id || ''}"`,
             `"${r.computer_model || ''}"`,
             `"${r.computer_type || ''}"`,
             `"${r.computer_price || ''}"`
