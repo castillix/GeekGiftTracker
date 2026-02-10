@@ -1,21 +1,19 @@
 services:
   backend:
     build: ./backend
+    image: geekgifttracker-backend:latest
     container_name: geekgift-backend
     volumes:
-      - geekgift_data:/app/db
-      - geekgift_uploads:/app/uploads
+      - /home/freegeek/share/Pages/GeekGiftTracker/geekgift_data:/app/db
+      - /home/freegeek/share/Pages/GeekGiftTracker/geekgift_uploads:/app/uploads
     ports:
       - "15003:8000"
 
   frontend:
     build: ./frontend
+    image: geekgifttracker-frontend:latest
     container_name: geekgift-frontend
     ports:
-      - "80:80"
+      - "15004:80"
     depends_on:
       - backend
-
-volumes:
-  geekgift_data:
-  geekgift_uploads:
