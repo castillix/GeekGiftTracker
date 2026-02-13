@@ -72,7 +72,7 @@ const Dashboard = () => {
                     </Link>
                 </div>
 
-                <div className="text-sm text-slate-500 mb-3 line-clamp-2 min-h-[2.5em]">
+                <div className="text-sm text-slate-500 mb-3">
                     {latestComment ? (
                         <div className="bg-slate-50 p-1.5 rounded border border-slate-100 italic text-slate-600">
                             <span className="font-semibold text-xs text-indigo-600 not-italic mr-1">Latest:</span>
