@@ -76,7 +76,7 @@ const Dashboard = () => {
                     {latestComment ? (
                         <div className="bg-slate-50 p-1.5 rounded border border-slate-100 italic text-slate-600">
                             <span className="font-semibold text-xs text-indigo-600 not-italic mr-1">Latest:</span>
-                            "{latestComment.content}"
+                            "{latestComment.content}" - {latestComment.author}
                         </div>
                     ) : (
                         <span className="text-slate-400">{request.description || "No status updates."}</span>
