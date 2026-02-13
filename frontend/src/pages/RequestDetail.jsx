@@ -72,7 +72,13 @@ const RequestDetail = () => {
 
         setSaving(true);
         try {
-            const updated = await updateRequest(id, formData);
+            // Convert empty strings to null for backend compatibility
+            const submissionData = Object.keys(formData).reduce((acc, key) => {
+                acc[key] = formData[key] === "" ? null : formData[key];
+                return acc;
+            }, {});
+
+            const updated = await updateRequest(id, submissionData);
             setRequest(updated);
             alert("Updated successfully!");
         } catch (error) {
