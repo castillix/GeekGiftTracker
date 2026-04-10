@@ -56,13 +56,24 @@ const Dashboard = () => {
             ? [...request.comments].sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0]
             : null;
 
+        const dateToUse = request.request_date || request.created_at;
+        let daysElapsed = 0;
+        let isOld = false;
+        if (dateToUse) {
+            const requestDate = new Date(dateToUse);
+            const now = new Date();
+            const diffTime = now - requestDate;
+            daysElapsed = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            isOld = daysElapsed > 21;
+        }
+
         return (
-            <div key={request.id} className="bg-white rounded-lg p-4 shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+            <div key={request.id} className={`bg-white rounded-lg p-4 shadow-sm border hover:shadow-md transition-shadow ${isOld ? 'border-red-300 bg-red-50' : 'border-slate-200'}`}>
                 <div className="flex justify-between items-start mb-2">
                     <div>
-                        <div className="font-bold text-slate-900">{request.recipient_name}</div>
+                        <div className={`font-bold ${isOld ? 'text-red-900' : 'text-slate-900'}`}>{request.recipient_name}</div>
                         {request.organization_name && (
-                            <div className="text-xs font-medium text-slate-600 flex items-center gap-1">
+                            <div className={`text-xs font-medium flex items-center gap-1 ${isOld ? 'text-red-700' : 'text-slate-600'}`}>
                                 <Building className="w-3 h-3" /> {request.organization_name}
                             </div>
                         )}
@@ -84,17 +95,24 @@ const Dashboard = () => {
                 </div>
 
                 <div className="space-y-2">
-                    <div className="flex items-center justify-between text-xs text-slate-500">
+                    <div className={`flex items-center justify-between text-xs ${isOld ? 'text-red-600' : 'text-slate-500'}`}>
                         <div className="flex items-center gap-1">
                             <User className="w-3 h-3" />
                             <span>{request.technician || "Unassigned"}</span>
                         </div>
-                        {request.due_date && (
-                            <div className="flex items-center gap-1 text-red-600 font-medium">
-                                <Calendar className="w-3 h-3" />
-                                {new Date(request.due_date).toLocaleDateString()}
-                            </div>
-                        )}
+                        <div className="flex flex-col items-end gap-1">
+                            {request.due_date && (
+                                <div className="flex items-center gap-1 text-red-600 font-medium">
+                                    <Calendar className="w-3 h-3" />
+                                    {new Date(request.due_date).toLocaleDateString()}
+                                </div>
+                            )}
+                            {dateToUse && (
+                                <div className="font-medium">
+                                    {daysElapsed} day{daysElapsed !== 1 ? 's' : ''} ago
+                                </div>
+                            )}
+                        </div>
                     </div>
 
                     <div className="pt-2 border-t border-slate-100 flex justify-end">
