@@ -39,6 +39,10 @@ const Dashboard = () => {
         return r.recipient_name.toLowerCase().includes(filter.toLowerCase()) ||
             (r.organization_name && r.organization_name.toLowerCase().includes(filter.toLowerCase())) ||
             (r.technician && r.technician.toLowerCase().includes(filter.toLowerCase()));
+    }).sort((a, b) => {
+        const dateA = new Date(a.request_date || a.created_at || 0);
+        const dateB = new Date(b.request_date || b.created_at || 0);
+        return dateA - dateB;
     });
 
     // Group requests by status
